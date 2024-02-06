@@ -58,6 +58,7 @@ class FightsManager
         $result = [];
         $Monster->hit($hero);
         array_push($result, "Le monstre a tapé le hero");
+        // sleep(10);
         $hero->hit($Monster);
         array_push($result, "Le héros a tapé le monstre");
 
@@ -72,5 +73,12 @@ class FightsManager
         ]);
         $Monster_update = $preparedRequest->fetch(PDO::FETCH_ASSOC);
         return $Monster_update;
+    }
+
+    public function heal(){
+        $preparedRequest = $this->connexion->prepare("UPDATE monsters SET health_points = 100");
+        $preparedRequest->execute();
+        $heal = $preparedRequest->fetch(PDO::FETCH_ASSOC);
+        return $heal;
     }
 }

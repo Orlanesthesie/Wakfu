@@ -91,7 +91,7 @@ $hero3 = $HeroesManager->find(12);
         <p class="card-text"></p>
         <form action="./fight.php" method="post" class="form">
         <input id="id_select_hero" type="hidden" name="id_select_hero" value="12">
-            <button class="btn btn-success bouton ff mt-2" type="submit">Choisir ce héros</button>
+            <button class="btn btn-success bouton " type="submit">Choisir ce héros</button>
         </form>
     </div>
 </div>
