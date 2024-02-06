@@ -58,6 +58,14 @@ h5 {
     align-items: center;
     font-size: 30px;
 }
+
+.heal {
+    height: 150px;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 100px;
+}
 /* ------------------------- */
 
 /* IMAGES MONSTER FIGHT */
@@ -107,7 +115,7 @@ h5 {
 }
 
 .marge {
-    height: 15%;
+    height: 10%;
 }
 
 /* ------------------------- */

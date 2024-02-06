@@ -19,11 +19,13 @@ class HeroesManager {
     }
     
     public function update($hero){
-        $preparedRequest = $this->connexion->prepare("UPDATE heroes SET health_points = :health_points WHERE id = :id");
+        $preparedRequest = $this->connexion->prepare("UPDATE heroes SET health_points = ? WHERE heroes.id = ? ");
         $preparedRequest->execute([
-            // GETTEUR DE HERO,
+            $hero->getHeroHealth_points(),
+            $hero->getHeroId()
         ]);
-
+        $hero_update = $preparedRequest->fetch(PDO::FETCH_ASSOC);
+        return $hero_update;
     }
     
     public function find($id){
@@ -40,5 +42,13 @@ class HeroesManager {
         return $hero;
         
     }
+
+    public function heal(){
+        $preparedRequest = $this->connexion->prepare("UPDATE heroes SET health_points = 100 ");
+        $preparedRequest->execute();
+        $heal = $preparedRequest->fetch(PDO::FETCH_ASSOC);
+        return $heal;
+    }
+
 
 }

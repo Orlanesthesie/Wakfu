@@ -67,4 +67,13 @@ class Hero
         $this->ornement = $ornement;
     }
 
+
+    public function toArray(){
+        return [
+            'id' => $this->getHeroId(),
+            'name' => $this->getHeroName(),
+            'health_points' => $this->getHeroHealth_points(),
+        ];
+    }
+
 }
