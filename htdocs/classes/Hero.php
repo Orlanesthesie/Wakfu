@@ -15,7 +15,7 @@ class Hero
 
     public function hit(Monster $monster)
     {
-        $damage = rand(10, 20);
+        $damage = rand(1, 10);
         $monsterHealthPoints = $monster -> getMonsterHealth_points();
         $monster->setMonsterHealth_points($monsterHealthPoints - $damage);
         return $damage;

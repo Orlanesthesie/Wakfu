@@ -6,4 +6,8 @@ $HeroesManager = new HeroesManager($connexion);
 
 $HeroesManager->heal();
 
+$FightsManager = new FightsManager($connexion);
+
+$FightsManager-> heal();
+
 header("Location: ../index.php");
