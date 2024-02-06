@@ -60,4 +60,12 @@ class Monster {
     {
         $this->ornement = $ornement;
     }
+
+    public function toArray(){
+        return [
+            'id' => $this->getMonsterId(),
+            'name' => $this->getMonsterName(),
+            'health_points' => $this->getMonsterHealth_points(),
+        ];
+    }
 }
