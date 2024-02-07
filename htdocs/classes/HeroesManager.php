@@ -8,7 +8,7 @@ class HeroesManager {
     }
     
     public function randomHero(){
-        $preparedRequest = $this->connexion->prepare("SELECT * FROM heroes ORDER BY RAND() LIMIT 1");
+        $preparedRequest = $this->connexion->prepare("SELECT * FROM heroes WHERE health_points > 0 ORDER BY RAND() LIMIT 1 ");
         $preparedRequest->execute();
         $randomHero = $preparedRequest->fetch(PDO::FETCH_ASSOC);
         $hero = new Hero($randomHero['name'], $randomHero['health_points']);
@@ -43,12 +43,37 @@ class HeroesManager {
         
     }
 
-    public function heal(){
-        $preparedRequest = $this->connexion->prepare("UPDATE heroes SET health_points = 100 ");
-        $preparedRequest->execute();
+    public function heal($id){
+        $preparedRequest = $this->connexion->prepare("UPDATE heroes SET health_points = 100 WHERE id = ?");
+        $preparedRequest->execute(
+            [$id]
+        );
         $heal = $preparedRequest->fetch(PDO::FETCH_ASSOC);
         return $heal;
     }
 
+    public function boost($id){
+        $preparedRequest = $this->connexion->prepare(" UPDATE heroes SET health_points = health_points + 50 WHERE id= ?");
+        $preparedRequest->execute(
+            [$id]
+        );
+        $boost = $preparedRequest->fetch(PDO::FETCH_ASSOC);
+        return $boost;
+    }
 
+    public function findAlive(){
+        $preparedRequest = $this->connexion->prepare("SELECT * FROM heroes WHERE health_points > 0");
+        $preparedRequest-> execute();
+        $alive = $preparedRequest->fetchAll(PDO::FETCH_ASSOC);
+        $result = [];
+        foreach ($alive as $heroArray) {
+        $hero = new Hero($heroArray['name'], $heroArray['health_points']);
+        $hero->setHeroId($heroArray['id']);
+        $hero->setHeroPhoto($heroArray['photo']);
+        $hero->setHeroOrn($heroArray['ornement']);
+        array_push($result, $hero);
+        }
+        
+        return $result;
+    }
 }

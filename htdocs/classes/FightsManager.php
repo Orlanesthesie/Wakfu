@@ -11,7 +11,7 @@ class FightsManager
 
     public function randomMonster() : Monster
     {
-        $preparedRequest = $this->connexion->prepare("SELECT * FROM monsters ORDER BY RAND() LIMIT 1");
+        $preparedRequest = $this->connexion->prepare("SELECT * FROM monsters WHERE health_points > 0 ORDER BY RAND() LIMIT 1 ");
         $preparedRequest->execute();
         $randomMonster = $preparedRequest->fetch(PDO::FETCH_ASSOC);
         // return $randomMonster;
@@ -58,7 +58,6 @@ class FightsManager
         $result = [];
         $Monster->hit($hero);
         array_push($result, "Le monstre a tapé le hero");
-        // sleep(10);
         $hero->hit($Monster);
         array_push($result, "Le héros a tapé le monstre");
 
@@ -76,7 +75,7 @@ class FightsManager
     }
 
     public function heal(){
-        $preparedRequest = $this->connexion->prepare("UPDATE monsters SET health_points = 100");
+        $preparedRequest = $this->connexion->prepare("UPDATE monsters SET health_points = 100");-
         $preparedRequest->execute();
         $heal = $preparedRequest->fetch(PDO::FETCH_ASSOC);
         return $heal;

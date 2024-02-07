@@ -13,22 +13,21 @@ if (isset($_POST['id_select_hero'])) {
 } else {
   $hero = $HeroesManager->randomHero();
 }
-
 $HeroesManager->update($hero);
+
 
 ?>
 
 <body class="village" style="background-image: url('./assets/images/village.jpg')">
 
-  <div class="marge"></div>
-
   <!-- FORMULAIRE DE RETOUR À L'INDEX -->
   <form action="./index.php" method="post">
     <div class="form-group">
       <input id="hp" type="hidden" name="hp" value="<?php $hero->getHeroHealth_points() ?>">
-      <button class="btn" type="submit"> <i class="fa-solid fa-person-walking-arrow-right fa-flip-horizontal fa-2xl" style="color: #18a03a;"></i></button>
+      <button class="btn" type="submit"> <img src="./assets/images/house(1).png" id="home"></button>
     </div>
   </form>
+
 
   <div class="d-flex flex-wrap justify-content-around combattants  container">
     <!-- afficher le nom + image + healthpoints du héros choisit -->
@@ -36,7 +35,9 @@ $HeroesManager->update($hero);
       <img class="ornement" src="/assets/images/<?= $hero->getHeroOrn() ?>">
       <img class="card-img-top perso" src="/assets/images/<?= $hero->getHeroPhoto() ?>">
       <div class="card-body">
-      <?= $hero->getHeroHealth_points() ?>
+        <div id="score_hero">
+          <?= $hero->getHeroHealth_points() ?> 
+        </div>
         <div class="progress">
           <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" 
               role="progressbar_hero" 
@@ -44,11 +45,9 @@ $HeroesManager->update($hero);
               aria-valuemin="-20" 
               aria-valuemax="100" 
               style="width: <?= $hero->getHeroHealth_points() ?>%"> 
-              
-              
             </div>
           </div>
-          
+         
       </div>
     </div>
 
@@ -58,7 +57,9 @@ $HeroesManager->update($hero);
       <img class="ornement" src="/assets/images/<?= $Monster->getMonsterOrn() ?>">
       <img class="card-img-top perso" src="/assets/images/<?= $Monster->getMonsterPhoto()  ?>">
       <div class="card-body">
-      <?= $Monster->getMonsterHealth_points() ?>
+        <div id="score_monster">
+          <?= $Monster->getMonsterHealth_points() ?>
+        </div>
         <div class="progress">
           <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" 
           role="progressbar_monster" 
@@ -66,10 +67,8 @@ $HeroesManager->update($hero);
           aria-valuemin="-20" 
           aria-valuemax="100" 
           style="width: <?= $Monster->getMonsterHealth_points() ?>%"> 
-
           </div> 
-        </div>
-       
+        </div>       
       </div>
     </div>
 

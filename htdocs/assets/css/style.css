@@ -20,6 +20,13 @@ body{
     z-index: -1;
     height: 100vh;
 }
+
+.clairiere {
+    background-size:  cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+    height: 100vh;
+}
 /* ------------------------- */
 
  /* IMAGES HEROS INDEX */
@@ -59,16 +66,35 @@ h5 {
     font-size: 30px;
 }
 
-.heal {
-    height: 150px;
-    width: 150px;
+#heal {
+    height: 35px;
     display: block;
     margin: auto;
-    margin-top: 100px;
+}
+
+#swords{
+    height: 30px;
+    display: block;
+    margin: auto;
+}
+
+#boost {
+    height: 30px;
+    display: block;
+    margin: auto;
+}
+
+#form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.victoire {
+    height: 20px;
 }
 /* ------------------------- */
 
-/* IMAGES MONSTER FIGHT */
+/* FIGHT */
 .oropo {
     height: 210px;
     width: 130px;
@@ -88,6 +114,22 @@ h5 {
     width: 130px;
     margin: auto;
     margin-top: 55px;
+}
+
+#score_hero {
+    color: white;
+    font-size: 30px;
+    text-align: end;
+}
+
+#score_monster {
+    color: white;
+    font-size: 30px;
+    text-align: start;
+}
+
+#home {
+    height:100px;
 }
 /* ------------------------- */
 
@@ -111,12 +153,12 @@ h5 {
 }
 
 .card-title {
-    height: 100px;
+    height: 50px;
 }
 
-.marge {
+/* .marge {
     height: 10%;
-}
+} */
 
 /* ------------------------- */
 

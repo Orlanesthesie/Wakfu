@@ -56,19 +56,22 @@ document.addEventListener('DOMContentLoaded', function() {
         let data = await response.json();
         let progressbar_hero = document.querySelector('div[role="progressbar_hero"]');
         let progressbar_monster = document.querySelector('div[role="progressbar_monster"]');
-        let div_score_hero = document.querySelector('div[class="card-body"]');
-        let div_score_monster = document.querySelector('div[class="card_monster"]'); 
+
+        let score_hero = document.querySelector('#score_hero');
+        let score_monster = document.querySelector('#score_monster');
+        
+
         if (isHeroTurn) {
             // Logique spécifique pour le tour du héros
             console.log("C'est le tour du héros !");
             // Mettre à jour la barre de progression du héros
-            div_score_hero.innerHTML = data.hero.health_points;
+            score_hero.innerHTML = data.hero.health_points;
             // progressbar_hero.setAttribute('aria-valuenow', data.hero.health_points);
             progressbar_hero.style.width = data.hero.health_points + "%";
         } else {
             console.log("C'est le tour du monstre !");
             // Mettre à jour la barre de progression du monstre
-            div_score_monster.innerHTML = data.monster.health_points; 
+            score_monster.innerHTML = data.monster.health_points; 
             // progressbar_monster.setAttribute('aria-valuenow', data.monster.health_points);
             progressbar_monster.style.width = data.monster.health_points + "%";
         }
