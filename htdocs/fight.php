@@ -14,9 +14,12 @@ if (isset($_POST['id_select_hero'])) {
   $hero = $HeroesManager->randomHero();
 }
 $HeroesManager->update($hero);
-
-
 ?>
+
+<!-- AUDIO -->
+<audio autoplay loop>
+  <source src="./assets/audio/fight.mp3" type="audio/mp3">
+</audio>
 
 <body class="village" style="background-image: url('./assets/images/village.jpg')">
 
@@ -51,6 +54,7 @@ $HeroesManager->update($hero);
       </div>
     </div>
 
+<div id="issue" class="issue blur"></div>
 
     <!-- afficher le nom + image + healthpoints du monstre choisit -->
     <div class="card blurr cardd " style="width: 18rem;">
@@ -71,7 +75,6 @@ $HeroesManager->update($hero);
         </div>       
       </div>
     </div>
-
 
     <input type="hidden" name="hero_id" value="<?= $hero->getHeroId() ?>">
     <input type="hidden" name="monster_id" value="<?= $Monster->getMonsterId() ?>">

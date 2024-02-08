@@ -14,8 +14,6 @@ class FightsManager
         $preparedRequest = $this->connexion->prepare("SELECT * FROM monsters WHERE health_points > 0 ORDER BY RAND() LIMIT 1 ");
         $preparedRequest->execute();
         $randomMonster = $preparedRequest->fetch(PDO::FETCH_ASSOC);
-        // return $randomMonster;
-        // var_dump($randomMonster);
         $monster = new Monster();
         $monster->setMonsterId($randomMonster['id']);
         $monster->setMonsterName($randomMonster['name']);
@@ -23,17 +21,6 @@ class FightsManager
         $monster->setMonsterPhoto($randomMonster['photo']);
         $monster->setMonsterOrn($randomMonster['ornement']);
         return $monster;
-    }
-
-    public function fight(Hero $hero, Monster $Monster)
-    {
-        $result = [];
-        while ($hero->getHeroHealth_points() >= 0 && $Monster->getMonsterHealth_points() >= 0) {
-            $Monster->hit($hero);
-            array_push($result, "Le monstre a tapé le hero");
-            $hero->hit($Monster);
-            array_push($result, "Le héros a tapé le monstre");
-        }
     }
 
     public function find($id){
@@ -60,7 +47,6 @@ class FightsManager
         array_push($result, "Le monstre a tapé le hero");
         $hero->hit($Monster);
         array_push($result, "Le héros a tapé le monstre");
-
         return $result;
     }
 
@@ -74,10 +60,18 @@ class FightsManager
         return $Monster_update;
     }
 
-    public function heal(){
-        $preparedRequest = $this->connexion->prepare("UPDATE monsters SET health_points = 100");-
+    public function healAllMonsters(){
+        $preparedRequest = $this->connexion->prepare("UPDATE monsters SET health_points = 100");
         $preparedRequest->execute();
         $heal = $preparedRequest->fetch(PDO::FETCH_ASSOC);
         return $heal;
+    }
+
+    public function victory(){
+        // Requete qui affiche les monstres qui sont vivants
+        $preparedRequest = $this->connexion->prepare("SELECT * FROM monsters WHERE health_points > 0");
+        $preparedRequest->execute();
+        $aliveMonsters = $preparedRequest->fetchAll(PDO::FETCH_ASSOC);
+        return $aliveMonsters;
     }
 }
