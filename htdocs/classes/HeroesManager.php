@@ -8,7 +8,7 @@ class HeroesManager {
     }
     
     public function randomHero(){
-        $preparedRequest = $this->connexion->prepare("SELECT * FROM heroes WHERE health_points > 0 ORDER BY RAND() LIMIT 1 ");
+        $preparedRequest = $this->connexion->prepare("SELECT * FROM heroes WHERE health_points > 0 AND id = 13 OR id = 14 OR id = 15 ORDER BY RAND() LIMIT 1 ");
         $preparedRequest->execute();
         $randomHero = $preparedRequest->fetch(PDO::FETCH_ASSOC);
         $hero = new Hero($randomHero['name'], $randomHero['health_points']);
@@ -41,6 +41,13 @@ class HeroesManager {
         $hero->setHeroOrn($heroData['ornement']);
         return $hero;
         
+    }
+
+    public function healAllHeroes(){
+        $preparedRequest = $this->connexion->prepare("UPDATE heroes SET health_points = 100");
+        $preparedRequest->execute();
+        $heal = $preparedRequest->fetch(PDO::FETCH_ASSOC);
+        return $heal;
     }
 
     public function heal($id){
